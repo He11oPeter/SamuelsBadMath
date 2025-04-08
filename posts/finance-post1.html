@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulating Your Portfolio’s Future</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']]
+    },
+    options: {
+      skipHtmlTags: ['script','noscript','style','textarea','pre']
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+<div class="container">
+  <h1>Simulating Your Portfolio’s Future: From Simple Growth to “More” Realistic Forecasts</h1>
+
+  <p>When planning for your financial future, one of the most powerful tools you can use is <em>simulation</em> — projecting how your portfolio might grow over time under different assumptions. Whether you’re saving for retirement, a home, or just building long-term wealth, understanding how your money could grow helps you make more informed decisions today.</p>
+
+  <p>In this post, we’ll walk through five increasingly sophisticated ways to simulate the future value of a portfolio. Each step adds a layer of realism, reflecting the way money and markets work in practice. And by the end, we’ll ask a bigger question: <em>what if the underlying assumptions of all these models are wrong?</em></p>
+
+  <h2>1. Basic Compounding (Can Calculate on Any Calculator)</h2>
+
+  <p>We start with the cleanest, most idealized version of investing: your money grows at a fixed annual rate. This is the realm of classic compound interest — the kind of growth that Albert Einstein supposedly called “the eighth wonder of the world.” While it may seem abstract, this model is powerful. It shows the exponential potential of even modest returns over long periods.</p>
+
+  <p>For example, if you invest $1,000 today at 5% annual interest, you’ll have around $3,000 in 23 years. But this simplicity is also its limitation: real life isn’t so smooth.</p>
+
+  <p>The classic compound interest formula for the future value of an investment is:</p>
+
+  <p><strong>Yearly Compounding:</strong> \\( \\text{Future Value} = P (1 + r)^X \\)</p>
+  <p><strong>Monthly Compounding:</strong> \\( \\text{Future Value} = P \\left(1 + \\frac{r}{N}\\right)^{N \\cdot X} \\)</p>
+
+  <p>Where:</p>
+  <ul>
+    <li><strong>P</strong> is the principal, i.e. the value at the start (at time zero, t=0).</li>
+    <li><strong>r</strong> is the annual rate of return (as a decimal).</li>
+    <li><strong>N</strong> is the number of compounding periods per year (for example, N = 12 for monthly compounding, N = 1 for annual compounding).</li>
+    <li><strong>X</strong> is the number of years the money is invested.</li>
+  </ul>
+
+  <p>The term \\((1 + r/N)\\) represents the growth factor in one compounding period, and the exponent \\(N \\cdot X\\) is the total number of compounding periods over X years. This equation gives the future value after X years of compounding at rate r.</p>
+
+  <p>If you use yearly compounding instead of monthly (i.e. N = 1), the formula simplifies to \\( \\text{Future Value} = P (1 + r)^X \\). On the other hand, for continuous compounding (compounding happening infinitely often in theory), you would use a slightly different formula: \\( \\text{Future Value} = P e^{r X} \\).</p>
+
+  <p><strong>Note:</strong> The rate of return r in these formulas must be consistent with the compounding method. In other words, you can’t use the same r for both a discrete formula and the continuous formula and expect the same result. For example, a 5% annual rate compounded continuously is not the same as a 5% annual rate compounded yearly. Always convert the rate appropriately if you switch between yearly, monthly, or continuous compounding. In the next section we will describe how to convert r between the 3 different types of compounding.</p>
+
+  <p>In practice most investments like common stocks don’t pay out in regular intervals like once per month or once per year, but the appreciation of the asset (a.k.a. the amount it increases yearly) can be converted into a monthly or annual percent increase (r).</p>
+
+  <p><em>Practice plugging in some numbers and play with these formulas to get a sense of how compounding works.</em> Try the same r value but in the 3 different equations (yearly compounding, monthly compounding, and continuous compounding) and you will see why the r rate needs to be adjusted if you switch equations in order to get the same future value.</p>
+
+  <h2>2. Including Regular Contributions (Can Calculate Using a Graphing Calculator or Desmos)</h2>
+
+  <p>Most people don’t just invest a lump sum and then walk away (which was the case for principal P in the basic compounding model). In reality, we build wealth through habit — for example, monthly contributions to a 401(k), annual IRA deposits, or automatic transfers to an investment account. Adding regular contributions makes the model more practical and shows the importance of consistency. It also highlights a powerful insight: saving early and consistently often matters more than chasing high returns.</p>
+
+  <p>To incorporate regular contributions into the growth formula, we need to account for new money added each compounding period. Once again, let’s assume monthly compounding (12 periods per year) since most people contribute on a close-to-monthly schedule. The interest rate must be adjusted to a per-month rate. If you have an annual interest rate r, the equivalent monthly rate r<sub>monthly</sub> can be found by solving:</p>
+
+  <p><strong>Return Rate Conversion:</strong> \\( (1 + r_{\\text{annual}}) = (1 + r_{\\text{monthly}})^{12} \\)</p>
+
+  <p>For instance, if the annual rate is 5% (0.05), then the monthly rate r<sub>monthly</sub> is \\( 1.05^{1/12} - 1 \\) (approximately 0.0041, or 0.41% per month).</p>
+
+  <p>Now, the formula for the future value with regular monthly contributions (amount <em>C</em> each month) over <em>X</em> years is:</p>
+
+  <p>$$ \\text{Future Value} = P \\left(1 + \\frac{r}{12}\\right)^{12X} + C \\frac{\\left(1 + \\frac{r}{12}\\right)^{12X} - 1}{r/12}. $$</p>
+
+  <p>Let’s break down this formula:</p>
+  <ul>
+    <li>The first term \\( P\\left(1 + \\frac{r}{12}\\right)^{12X} \\) is the growth of your initial principal (P) over X years at the monthly-compounded rate.</li>
+    <li>The second term \\( C \\frac{\\left(1 + \\frac{r}{12}\\right)^{12X} - 1}{r/12} \\) represents the accumulated effect of making regular contributions C each month. This is a geometric series: each contribution earns interest for the remaining months in the investment horizon. The formula in brackets is the sum of that geometric series, which calculates how much all those contributions will amount to after X years.</li>
+  </ul>
+
+  <p>If the formula looks intimidating, the key point to remember is that each monthly deposit grows from the time it is deposited until the end of the period. The earliest contributions have the longest to compound, and the later contributions have less time to grow. The geometric series formula above is just a convenient way to calculate the total result of all those contributions and the interest they earn.</p>
+
+  <p><strong>Explaining The Structure of the 2nd Part of the Formula:</strong> The contribution part of the formula comes from summing each monthly contribution’s growth. The contributions form a series:</p>
+
+  <p class="graph-caption">Example Graph between Basic Compounding and Including Regular Contributions</p>
+  <div class="graph-placeholder">Insert graph here</div>
+
+  <p>To make this more concrete, let’s visualize what regular saving can do. Consider a modest scenario: you start with an initial $1,000 (P0 = $1,000) and contribute $500 every month, with an effective annual return of 5%. After 10 years, how much would you have?</p>
+
+  <p>In a chart of these two scenarios, the <span class="green-line">green line</span> (initial $1k only) would barely creep upward, while the <span class="red-line">red line</span> ($1,000 with regular $500 contributions) would shoot up quickly due to contributions being more important in early years.</p>
+
+  <p>The lesson for young or new investors is clear: when you are starting out, contributions matter a whole lot more than high returns. In the early stages, the amount you save can outweigh the percentage return, because a small portfolio can only grow so much on its own. So don’t worry about chasing the next Bitcoin, Tesla, or Nvidia in hopes of striking it rich overnight. Focus on saving consistently and “paying yourself first.” Just save smart.</p>
+
+  <h2>3. Growing Contributions (Can Calculate Using Desmos or an Advanced Tool)</h2>
+
+  <p>Over time, your income (hopefully) increases, and with it, your ability to save. This third model introduces the idea of contributions that grow annually — whether through raises, promotions, or just committing to save a bit more each year. A 3–5% annual increase in your savings rate might not sound like much, but compounded over decades, it can dramatically increase your portfolio’s future value. This model starts to resemble the real trajectory of many working professionals, especially those in careers with steady income growth.</p>
+
+  <p>Introducing growing contributions makes the calculation trickier, because the contribution amount is changing every year. The formula becomes <em>recursive</em> (each year’s result builds on the last, and the contribution for each period depends on the year). There is a closed-form solution for a growing annuity (increasing contributions) – it can be derived using techniques similar to the geometric series in section 2 – but it’s a bit complex and not as intuitive to understand by eye. Instead, it's easier to simulate or compute this scenario step by step (using a tool like Desmos or writing a small Python script). (Even ChatGPT could guide you through using Desmos if you're not sure!)</p>
+
+  <p>In a recursive form, you can think of it like this: each month your portfolio grows by the monthly factor, and you add that month’s contribution. The twist is that the contribution <em>C</em> itself increases by a small amount each year. For example, if you start by contributing $500 per month in the first year and plan to increase contributions by 5% each year, then in the second year you’d contribute $525 per month, in the third year about $551 per month, and so on (5% more each year).</p>
+
+  <p>Using a graphing calculator, spreadsheet, or Desmos you can iterate this calculation month by month. The variables involved are:</p>
+  <ul>
+    <li><strong>P</strong> = the initial amount in the portfolio at time t=0.</li>
+    <li><strong>C</strong> = the initial contribution amount.</li>
+    <li><strong>r</strong> = the annual rate of return (for consistency, we’ll continue using a safe 5% assumed return).</li>
+    <li><strong>n</strong> = the number of contribution periods in a year (n = 12 for monthly).</li>
+    <li><strong>g</strong> = the growth rate of contributions per year (for example, 5% annual increase in contribution).</li>
+    <li><strong>L</strong> = the number of times the contribution has been increased.</li>
+    <li><strong>X</strong> = the number of years you plan to contribute and invest.</li>
+  </ul>
+
+  <p>Using these, each year's contributions will be slightly higher than the last. The formula for the total future value after X years can be written as a summation, although it’s a bit unwieldy:</p>
+
+  <p>$$ \\text{Future Value} = P \\left(1+\\frac{r}{n}\\right)^{nX} + \\sum_{i=0}^{X-1} C (1+g)^i \\frac{\\left(1+\\frac{r}{n}\\right)^{n} - 1}{r/n} \\left(1+\\frac{r}{n}\\right)^{n(X-1-i)}. $$</p>
+
+  <p>Don’t worry if that looks complicated – it basically says: your initial amount grows for X years, and each year's contributions (which start at C and grow each year by g) gets compounded from the time they are contributed until the end of year X. We sum over each month L from 0 to nX-1 to account for each batch of contributions. The closed-form solution (without the summation) exists, but as you can see, it’s not very easy to interpret at a glance. The summation or recursive approach is clearer conceptually: you’re just adding up the future values of each contribution.</p>
+
+  <p class="graph-caption">Example Graph between the 3 Portfolio Projections Covered:</p>
+  <div class="graph-placeholder">Insert graph here</div>
+
+  <p>Let’s illustrate the impact of growing contributions. We’ll use the same baseline as before: initial $1,000, monthly contribution $500, 5% return, 5% increase in contributions (you will have to adjust the r and g values from yearly equivalents to monthly equivalents).</p>
+
+  <p>We extended the simulation longer here because the benefit of increasing your contributions isn’t very noticeable in the short term. In the first few years, a 5% bump on a modest contribution doesn’t move the needle much. But as the years add up, those incremental increases compound on top of both your investment returns and your growing contribution base, resulting in a significantly larger portfolio down the road. The graph of this scenario (fixed vs. growing contributions vs. no contributions) would show the lines starting at the same place and growing at similar rates initially, but after a decade or two, the line with growing contributions would pull far ahead. Even a humble 5% yearly increase in savings can add up to a huge difference over the long term.</p>
+
+  <p><em>Note: There is a formula for the future value of a growing annuity (i.e., payments growing at rate g each period), which is the closed-form mentioned earlier. It’s handy for precise calculations, but the recursive understanding is usually more intuitive and perfectly fine when you have a computer or calculator to do the summation for you.</em></p>
+
+  <h2>4. Return and Risk</h2>
+
+  <p>Up to now, we assumed a <em>fixed return</em> every year (a steady 5% in our examples). Now we introduce uncertainty. Real markets don’t deliver a guaranteed return — they fluctuate daily, monthly, and yearly. In some years you might get 20% or 30% returns, in others you might lose money. This variability can lead to higher long-run returns (because you’re taking on more risk), but it can also lead to periods of crippling losses.</p>
+
+  <p>In previous models, we used a relatively low rate of return (5% annually) — something you might achieve by buying very safe assets like U.S. government T-bills. Low-risk assets like T-bills are almost guaranteed to give you a consistent return close to the stated rate, but they will give no more than that (historically, around 4–5% at best). If we want to model a portfolio that includes riskier assets like stocks, we should use a higher expected return r and account for the volatility (the ups and downs).</p>
+
+  <p>Now that we are increasing the complexity of the model to include concepts like volatility and risk, we can also increase our expected return r by including assets that aren’t guaranteed a positive return. (Of course, a self-proclaimed genius investor might believe they are guaranteed high returns, but our models will not assume you have any magic stock-picking ability!) In other words, to potentially earn more, we have to accept the possibility of losses along the way.</p>
+
+  <p>So how do we simulate a portfolio with variable returns? Instead of a fixed growth factor each period, we model your portfolio using <em>probabilistic returns</em> drawn from historical data (or assumed distributions) for different asset classes. This is where simulation gets really interesting. Using a computer, we can project not just one possible future, but thousands of possible futures. For example, you might simulate 10,000 potential outcomes for your portfolio over 30 years. Some of those scenarios will see you retiring early with more money than you expected; others might see your portfolio falling short of your goals. By doing this, you get a much better sense of <em>risk</em> – not just the expected outcome, but the <em>range</em> of possible outcomes.</p>
+
+  <p>You can answer questions like: <em>What’s the probability that my $500k could turn into $1 million or more? What’s the chance it could actually shrink over 10 years?</em> Modeling the ups and downs helps you understand how much risk you're really taking on with your investment strategy.</p>
+
+  <p>One way to implement this is through <em>Monte Carlo simulation</em>. Each year (or each month, if you want finer granularity), you randomly draw a return from a distribution that represents the market. For example, you could assume that stock returns in a given year are normally distributed with some average (mean) and standard deviation (spread). Over many trials, these random draws will produce a spectrum of outcomes. Typically, we derive the mean and standard deviation from historical data for the asset class we’re interested in.</p>
+
+  <p>To ground this in finance theory: we often model stock price movements using something called <em>stochastic calculus</em> (don’t be intimidated by the term). In particular, the classic model for stock prices is based on <em>Brownian motion</em>. If you want to dive into the mathematical detail, feel free to explore the appendix or advanced texts, but here’s a short, intuitive explanation of the idea:</p>
+
+  <ul>
+    <li><strong>Brownian motion</strong> is a fancy term for a process that has a random component. It’s named after the random movement of pollen particles observed under a microscope (by botanist Robert Brown). In finance, we use it to model random fluctuations in prices.</li>
+    <li>Think of a stock’s return over a small interval as having two parts: a consistent part (often called the “drift”) that pushes the price upward on average, and a random part (often called “shock” or “volatility”) that can move the price up or down unpredictably.</li>
+    <li>The consistent part could be something like “on average, this stock index grows 0.5% per month” (which would sum to about 6% per year drift). The random part is modeled as a random jump drawn from a distribution each period, with a certain standard deviation. This standard deviation is typically denoted by the Greek letter sigma (&sigma;) and represents how volatile the asset is. Some months the random part will be positive, some months negative, sometimes small, occasionally large.</li>
+    <li>When you combine these two parts, you get a model for how a stock price evolves: it tends to grow over time (if the drift is positive), but it never grows in a straight line — it jiggles up and down along the way. The price path of a stock, as modeled by Brownian motion with drift, will look like an upward trend with a lot of squiggles due to randomness.</li>
+  </ul>
+
+  <p>For our simulation purposes, we don’t actually need to solve calculus equations; we can simply use the statistical inputs (average return and standard deviation) to generate random returns. For example, suppose we want to simulate a <em>stock-heavy</em> portfolio. We might assume an average annual return of ~8% (which has been roughly the long-term historical return of stocks after inflation) and a standard deviation of about 15% per year. For a <em>bond-heavy</em> portfolio, the average might be lower (say 5% per year) with much lower volatility (maybe 5% per year). For simplicity, we can use rough historical estimates like:</p>
+
+  <ul>
+    <li><strong>Stocks:</strong> ~8% average annual return, ~15% annual volatility (&sigma; = 0.15).</li>
+    <li><strong>Bonds:</strong> ~5% average annual return, ~5% annual volatility (&sigma; = 0.05).</li>
+  </ul>
+
+  <p><em>(These are illustrative figures; actual historical numbers depend on the time period and the exact market index or bond type. The key is stocks have higher return and higher risk, bonds lower return and lower risk.)</em></p>
+
+  <p>Using such estimates to drive a simulation is <em>backward-looking</em> — it assumes the future will have statistical properties similar to the past. This approach has its flaws, but generally, the longer the time scale and the broader the market index you consider, the more reasonable it becomes to use historical averages as a guide. (We’ll question this assumption more in the next section.)</p>
+
+  <p><strong>Now That We Are Done Reviewing the Process</strong></p>
+  <p><strong>Here is the Actual Code</strong></p>
+  <p>Link:</p>
+
+  <p><strong>Running the Code Will Produce a Graph of 10 of the 200 simulated Paths</strong></p>
+  <p>The code runs on parameters similar to what we have been using and is described in the code as:</p>
+  <p class="graph-caption">The Graph Will Look Like the Following:</p>
+  <div class="graph-placeholder">Insert graph here</div>
+
+  <h2>5. Covariance of Returns</h2>
+
+  <p>As a final note I would like to add one important tool that is useful in simulating the potential future of your portfolio, but this tool is not explicitly used in the simulation. If your portfolio is made up of individual stocks then the concept of Covariance is extremely useful.</p>
+
+  <h2>6. Questioning the Assumptions</h2>
+
+  <p>At this point, we pause and zoom out. All of the above models rest on a deep assumption: that the future will look like the past. Most simulations, even the sophisticated ones, assume that historical returns — say ~8% annually from stocks — will continue more or less unchanged for the next 30, 40, even 100 years. But is that a safe assumption?</p>
+
+  <p>It’s worth remembering that the U.S. stock market’s remarkable 20th-century performance wasn’t guaranteed; it was shaped by a unique confluence of factors. The post–World War II economic expansion, rapid industrialization, a massive baby boom, the rise of global capitalism, and technological revolutions all fueled an era of strong growth. A dollar invested in the S&amp;P 500 in 1926 grew to over $10,000 by 2023 (with dividends reinvested). That growth was phenomenal, but it didn’t happen in a straight line or due to some natural law — it came alongside the Great Depression, World War II, periods of high inflation in the 1970s, the dot-com bust, and the 2008 financial crisis. Even through these disruptions, the long-term trend for the U.S. market remained upward. But should we assume that continues indefinitely?</p>
+
+  <p>Japan offers a cautionary tale about assuming the future will mimic the past. In the late 1980s, Japan’s stock market was soaring to record heights, fueled by a booming economy and speculative frenzy. Many expected the good times to roll on for decades. But after the bubble burst in 1990, the Nikkei index stagnated for decades. An investor who bought at the peak in 1989 had to wait over 30 years just to break even. Japan’s economy faced deflation, an aging population, and other headwinds that led to a long period of malaise. This isn't to say the U.S. (or any other market) is destined for the same fate, but it’s a stark reminder that market growth isn’t a guarantee or a law of nature. It’s the result of economic, social, and political conditions — all of which can change in unexpected ways.</p>
+
+  <p>Today, we face uncertainties of a different kind: aging populations in many developed countries, rising inequality, climate instability, and a global economy that is more interconnected (and thus potentially more fragile) than ever before. Meanwhile, stock valuations in some markets have been hovering at historically high levels, and many investors seem confident that the past ~100 years of market performance are a blueprint for the next 100. But what if they’re not?</p>
+
+  <p>In this final section, it’s worth reflecting on the limitations of simulation itself. Even if we embrace randomness and simulate thousands of outcomes, we are still constrained by the assumptions baked into our models. We’ve added complexity step by step — from fixed growth, to steady contributions, to raising contributions, to adding volatility — but all of it was built on historical experience and relatively stable parameters. The biggest risk is that we’re building our forecasts on foundations that may shift beneath our feet. This isn’t a reason to despair or to avoid investing (remember, doing nothing and keeping money under the mattress has its own risks, like inflation). But it <em>is</em> a reason to stay thoughtful, skeptical, and humble in the face of the uncertain future.</p>
+
+  <p>Ultimately, why have stocks (ownership in companies) outperformed most other asset classes over the long run? It comes down to human innovation and productivity. A share of stock represents a stake in human enterprise — and over the last century, humans have organized into corporations and institutions that achieved incredible things. The ability of people to collaborate, invent, and build has driven immense economic growth, far more than just holding barrels of oil, bars of gold, or stacks of cash. Through leadership, teamwork, and the collective brainpower of many, companies have created value and wealth — and this is why the stock market has historically trended upward and rewarded patient investors.</p>
+
+  <p>So, is it reasonable to believe this pattern will continue? After all, <em>why would it change?</em></p>
+</div>
+</body>
+</html>
