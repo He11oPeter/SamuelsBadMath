@@ -65,8 +65,9 @@
   <p>For instance, if the annual rate is 5% (0.05), then the monthly rate r<sub>monthly</sub> is \\( 1.05^{1/12} - 1 \\) (approximately 0.0041, or 0.41% per month).</p>
 
   <p>Now, the formula for the future value with regular monthly contributions (amount <em>C</em> each month) over <em>X</em> years is:</p>
-
-  <p>$$ \\text{Future Value} = P \\left(1 + \\frac{r}{12}\\right)^{12X} + C \\frac{\\left(1 + \\frac{r}{12}\\right)^{12X} - 1}{r/12}. $$</p>
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image2.png" alt="image1 - 3 compounding formulas" />
+  </div>
 
   <p>Let’s break down this formula:</p>
   <ul>
@@ -77,12 +78,16 @@
   <p>If the formula looks intimidating, the key point to remember is that each monthly deposit grows from the time it is deposited until the end of the period. The earliest contributions have the longest to compound, and the later contributions have less time to grow. The geometric series formula above is just a convenient way to calculate the total result of all those contributions and the interest they earn.</p>
 
   <p><strong>Explaining The Structure of the 2nd Part of the Formula:</strong> The contribution part of the formula comes from summing each monthly contribution’s growth. The contributions form a series:</p>
-
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image3.png" alt="image1 - 3 compounding formulas" />
+  </div>
   <p class="graph-caption">Example Graph between Basic Compounding and Including Regular Contributions</p>
   <div class="graph-placeholder">Insert graph here</div>
 
   <p>To make this more concrete, let’s visualize what regular saving can do. Consider a modest scenario: you start with an initial $1,000 (P0 = $1,000) and contribute $500 every month, with an effective annual return of 5%. After 10 years, how much would you have?</p>
-
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image4.png" alt="image1 - 3 compounding formulas" />
+  </div>
   <p>In a chart of these two scenarios, the <span class="green-line">green line</span> (initial $1k only) would barely creep upward, while the <span class="red-line">red line</span> ($1,000 with regular $500 contributions) would shoot up quickly due to contributions being more important in early years.</p>
 
   <p>The lesson for young or new investors is clear: when you are starting out, contributions matter a whole lot more than high returns. In the early stages, the amount you save can outweigh the percentage return, because a small portfolio can only grow so much on its own. So don’t worry about chasing the next Bitcoin, Tesla, or Nvidia in hopes of striking it rich overnight. Focus on saving consistently and “paying yourself first.” Just save smart.</p>
@@ -107,7 +112,9 @@
   </ul>
 
   <p>Using these, each year's contributions will be slightly higher than the last. The formula for the total future value after X years can be written as a summation, although it’s a bit unwieldy:</p>
-
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image5.png" alt="image1 - 3 compounding formulas" />
+  </div>
   <p>$$ \\text{Future Value} = P \\left(1+\\frac{r}{n}\\right)^{nX} + \\sum_{i=0}^{X-1} C (1+g)^i \\frac{\\left(1+\\frac{r}{n}\\right)^{n} - 1}{r/n} \\left(1+\\frac{r}{n}\\right)^{n(X-1-i)}. $$</p>
 
   <p>Don’t worry if that looks complicated – it basically says: your initial amount grows for X years, and each year's contributions (which start at C and grow each year by g) gets compounded from the time they are contributed until the end of year X. We sum over each month L from 0 to nX-1 to account for each batch of contributions. The closed-form solution (without the summation) exists, but as you can see, it’s not very easy to interpret at a glance. The summation or recursive approach is clearer conceptually: you’re just adding up the future values of each contribution.</p>
@@ -116,11 +123,15 @@
   <div class="graph-placeholder">Insert graph here</div>
 
   <p>Let’s illustrate the impact of growing contributions. We’ll use the same baseline as before: initial $1,000, monthly contribution $500, 5% return, 5% increase in contributions (you will have to adjust the r and g values from yearly equivalents to monthly equivalents).</p>
-
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image6.png" alt="image1 - 3 compounding formulas" />
+  </div>
   <p>We extended the simulation longer here because the benefit of increasing your contributions isn’t very noticeable in the short term. In the first few years, a 5% bump on a modest contribution doesn’t move the needle much. But as the years add up, those incremental increases compound on top of both your investment returns and your growing contribution base, resulting in a significantly larger portfolio down the road. The graph of this scenario (fixed vs. growing contributions vs. no contributions) would show the lines starting at the same place and growing at similar rates initially, but after a decade or two, the line with growing contributions would pull far ahead. Even a humble 5% yearly increase in savings can add up to a huge difference over the long term.</p>
 
   <p><em>Note: There is a formula for the future value of a growing annuity (i.e., payments growing at rate g each period), which is the closed-form mentioned earlier. It’s handy for precise calculations, but the recursive understanding is usually more intuitive and perfectly fine when you have a computer or calculator to do the summation for you.</em></p>
-
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image7.png" alt="image1 - 3 compounding formulas" />
+  </div>
   <h2>4. Return and Risk</h2>
 
   <p>Up to now, we assumed a <em>fixed return</em> every year (a steady 5% in our examples). Now we introduce uncertainty. Real markets don’t deliver a guaranteed return — they fluctuate daily, monthly, and yearly. In some years you might get 20% or 30% returns, in others you might lose money. This variability can lead to higher long-run returns (because you’re taking on more risk), but it can also lead to periods of crippling losses.</p>
@@ -157,10 +168,16 @@
   <h3><strong>Summary of the Underlying Math</strong></h3>
 <ol>
     <li>Stochastic Differential Equation (SDE):<br>
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image8.png" alt="image1 - 3 compounding formulas" />
+  </div>
         Describes the evolution of a value randomly over time.
     </li>
 
     <li>Discretization (Euler–Maruyama or exponential scheme):<br>
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image9.png" alt="image1 - 3 compounding formulas" />
+  </div>
         Provides an approximation method to convert continuous-time equations into discrete time steps.
     </li>
 
@@ -182,7 +199,9 @@
     <li>Withdrawals (cash taken out of the portfolio)</li>
     <li>Fees, dividends, rebalancing, among other considerations</li>
 </ul>
-
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image10.png" alt="image1 - 3 compounding formulas" />
+  </div>
 <p>In mathematical terms, contributions affect the net growth or drift of the portfolio. Typically, contributions can be added either before or after the stochastic portfolio evolution step.</p>
 
 <h3><strong>Monte Carlo Approach</strong></h3>
@@ -215,16 +234,29 @@
   <p><strong>Now That We Are Done Reviewing the Process</strong></p>
   <p><strong>Here is the Actual Code</strong></p>
   <p>Link:</p>
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image11.png" alt="image1 - 3 compounding formulas" />
+  </div>
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image12.png" alt="image1 - 3 compounding formulas" />
+  </div>
 
   <p><strong>Running the Code Will Produce a Graph of 10 of the 200 simulated Paths</strong></p>
   <p>The code runs on parameters similar to what we have been using and is described in the code as:</p>
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image13.png" alt="image1 - 3 compounding formulas" />
+  </div>
   <p class="graph-caption">The Graph Will Look Like the Following:</p>
-  <div class="graph-placeholder">Insert graph here</div>
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image14.png" alt="image1 - 3 compounding formulas" />
+  </div>
 
   <h2>5. Covariance of Returns</h2>
 
   <p>As a final note I would like to add one important tool that is useful in simulating the potential future of your portfolio, but this tool is not explicitly used in the simulation. If your portfolio is made up of individual stocks then the concept of Covariance is extremely useful.</p>
-
+  <div class="graph-placeholder">
+    <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image15.png" alt="image1 - 3 compounding formulas" />
+  </div>
   <h2>6. Questioning the Assumptions</h2>
 
   <p>At this point, we pause and zoom out. All of the above models rest on a deep assumption: that the future will look like the past. Most simulations, even the sophisticated ones, assume that historical returns — say ~8% annually from stocks — will continue more or less unchanged for the next 30, 40, even 100 years. But is that a safe assumption?</p>
