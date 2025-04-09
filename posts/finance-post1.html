@@ -154,6 +154,62 @@
   <p><em>(These are illustrative figures; actual historical numbers depend on the time period and the exact market index or bond type. The key is stocks have higher return and higher risk, bonds lower return and lower risk.)</em></p>
 
   <p>Using such estimates to drive a simulation is <em>backward-looking</em> — it assumes the future will have statistical properties similar to the past. This approach has its flaws, but generally, the longer the time scale and the broader the market index you consider, the more reasonable it becomes to use historical averages as a guide. (We’ll question this assumption more in the next section.)</p>
+  <h2>Summary of the Underlying Math</h2>
+<ol>
+    <li><strong>Stochastic Differential Equation (SDE):</strong><br>
+        Describes the evolution of a value randomly over time.
+    </li>
+
+    <li><strong>Discretization (Euler–Maruyama or exponential scheme):</strong><br>
+        Provides an approximation method to convert continuous-time equations into discrete time steps.
+    </li>
+
+    <li><strong>Add contributions or withdrawals:</strong><br>
+        Incorporates real-world portfolio activity into the simulation steps.
+    </li>
+
+    <li><strong>Monte Carlo:</strong><br>
+        Runs multiple simulated paths to analyze potential outcomes statistically.
+    </li>
+</ol>
+
+<p>This forms the practical connection between Python code and stochastic calculus theory, utilizing randomness from a normal distribution to emulate the increments observed in Brownian motion.</p>
+
+<h2>Adding Contributions and Withdrawals</h2>
+<p>Portfolio simulations often include factors beyond simple value evolution:</p>
+<ul>
+    <li><strong>Contributions</strong> (cash added into the portfolio)</li>
+    <li><strong>Withdrawals</strong> (cash taken out of the portfolio)</li>
+    <li><strong>Fees, Dividends, Rebalancing</strong>, among other considerations</li>
+</ul>
+
+<p>In mathematical terms, contributions affect the net growth or drift of the portfolio. Typically, contributions can be added either before or after the stochastic portfolio evolution step.</p>
+
+<h2>Monte Carlo Approach</h2>
+<p>Since each step includes randomness, Monte Carlo simulations involve numerous trials to statistically examine:</p>
+<ul>
+    <li>Average final portfolio value</li>
+    <li>Distribution and percentiles of final portfolio values</li>
+    <li>Probability of achieving specific financial objectives</li>
+</ul>
+
+<p>Implementation typically involves:</p>
+<ol>
+    <li><strong>For each simulated path:</strong>
+        <ol type="a">
+            <li>Initialize the portfolio value</li>
+            <li><strong>For each time step:</strong>
+                <ul>
+                    <li>Generate a random number</li>
+                    <li>Update portfolio value based on the discretization method</li>
+                    <li>Optionally, include contributions or withdrawals</li>
+                </ul>
+            </li>
+        </ol>
+    </li>
+    <li>Record the outcomes for subsequent analysis</li>
+</ol>
+
 
   <p><strong>Now That We Are Done Reviewing the Process</strong></p>
   <p><strong>Here is the Actual Code</strong></p>
