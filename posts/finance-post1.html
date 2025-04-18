@@ -38,15 +38,15 @@
 
   <p>Where:</p>
   <ul>
-    <li><strong>P</strong> is the principal, i.e. the value at the start (at time zero, t=0).</li>
+    <li><strong>P</strong> is the principal, i.e. the value at the start (at time zero, x=0).</li>
     <li><strong>r</strong> is the annual rate of return (as a decimal).</li>
     <li><strong>N</strong> is the number of compounding periods per year (for example, N = 12 for monthly compounding, N = 1 for annual compounding).</li>
     <li><strong>X</strong> is the number of years the money is invested.</li>
   </ul>
 
-  <p>The term \\((1 + r/N)\\) represents the growth factor in one compounding period, and the exponent \\(N \\cdot X\\) is the total number of compounding periods over X years. This equation gives the future value after X years of compounding at rate r.</p>
+  <p>The term (1 + r/N) represents the growth factor in one compounding period, and the exponent (n x) is the total number of compounding periods over x years. This equation gives the future value after x years of compounding at rate r.</p>
 
-  <p>If you use yearly compounding instead of monthly (i.e. N = 1), the formula simplifies to \\( \\text{Future Value} = P (1 + r)^X \\). On the other hand, for continuous compounding (compounding happening infinitely often in theory), you would use a slightly different formula: \\( \\text{Future Value} = P e^{r X} \\).</p>
+  <p>If you use yearly compounding instead of monthly (i.e. n = 1), the formula simplifies to ( Future Value = P (1 + r)^X ). On the other hand, for continuous compounding (compounding happening infinitely often in theory), you would use a slightly different formula: ( Future Value = P e^{r x} ).</p>
 
   <p><strong>Note:</strong> The rate of return r in these formulas must be consistent with the compounding method. In other words, you can’t use the same r for both a discrete formula and the continuous formula and expect the same result. For example, a 5% annual rate compounded continuously is not the same as a 5% annual rate compounded yearly. Always convert the rate appropriately if you switch between yearly, monthly, or continuous compounding. In the next section we will describe how to convert r between the 3 different types of compounding.</p>
 
@@ -60,9 +60,9 @@
 
   <p>To incorporate regular contributions into the growth formula, we need to account for new money added each compounding period. Once again, let’s assume monthly compounding (12 periods per year) since most people contribute on a close-to-monthly schedule. The interest rate must be adjusted to a per-month rate. If you have an annual interest rate r, the equivalent monthly rate r<sub>monthly</sub> can be found by solving:</p>
 
-  <p><strong>Return Rate Conversion:</strong> \\( (1 + r_{\\text{annual}}) = (1 + r_{\\text{monthly}})^{12} \\)</p>
+  <p><strong>Return Rate Conversion:</strong> ( 1 + r_annual = 1 + r_monthly^12 )</p>
 
-  <p>For instance, if the annual rate is 5% (0.05), then the monthly rate r<sub>monthly</sub> is \\( 1.05^{1/12} - 1 \\) (approximately 0.0041, or 0.41% per month).</p>
+  <p>For instance, if the annual rate is 5% (0.05), then the monthly rate r_monthly is ( 1.05^{1/12} - 1 ) (approximately 0.0041, or 0.41% per month).</p>
 
   <p>Now, the formula for the future value with regular monthly contributions (amount <em>C</em> each month) over <em>X</em> years is:</p>
   <div class="graph-placeholder">
@@ -71,8 +71,8 @@
 
   <p>Let’s break down this formula:</p>
   <ul>
-    <li>The first term \\( P\\left(1 + \\frac{r}{12}\\right)^{12X} \\) is the growth of your initial principal (P) over X years at the monthly-compounded rate.</li>
-    <li>The second term \\( C \\frac{\\left(1 + \\frac{r}{12}\\right)^{12X} - 1}{r/12} \\) represents the accumulated effect of making regular contributions C each month. This is a geometric series: each contribution earns interest for the remaining months in the investment horizon. The formula in brackets is the sum of that geometric series, which calculates how much all those contributions will amount to after X years.</li>
+    <li>The first term is the growth of your initial principal (P) over X years at the monthly-compounded rate.</li>
+    <li>The second term represents the accumulated effect of making regular contributions C each month. This is a geometric series: each contribution earns interest for the remaining months in the investment horizon. The formula in brackets is the sum of that geometric series, which calculates how much all those contributions will amount to after X years.</li>
   </ul>
 
   <p>If the formula looks intimidating, the key point to remember is that each monthly deposit grows from the time it is deposited until the end of the period. The earliest contributions have the longest to compound, and the later contributions have less time to grow. The geometric series formula above is just a convenient way to calculate the total result of all those contributions and the interest they earn.</p>
@@ -115,7 +115,6 @@
   <div class="graph-placeholder">
     <img src="https://raw.githubusercontent.com/He11oPeter/SamuelsBadMath/main/images/Finance-post1-image5.png" alt="image1 - 3 compounding formulas" />
   </div>
-  <p>$$ \\text{Future Value} = P \\left(1+\\frac{r}{n}\\right)^{nX} + \\sum_{i=0}^{X-1} C (1+g)^i \\frac{\\left(1+\\frac{r}{n}\\right)^{n} - 1}{r/n} \\left(1+\\frac{r}{n}\\right)^{n(X-1-i)}. $$</p>
 
   <p>Don’t worry if that looks complicated – it basically says: your initial amount grows for X years, and each year's contributions (which start at C and grow each year by g) gets compounded from the time they are contributed until the end of year X. We sum over each month L from 0 to nX-1 to account for each batch of contributions. The closed-form solution (without the summation) exists, but as you can see, it’s not very easy to interpret at a glance. The summation or recursive approach is clearer conceptually: you’re just adding up the future values of each contribution.</p>
 
